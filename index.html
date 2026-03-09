@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Excel Data Automator</title>
+    <meta name="description" content="Offline FCL NCBFAASA Rates processor">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="background-elements">
+        <div class="blob shape1"></div>
+        <div class="blob shape2"></div>
+        <div class="blob shape3"></div>
+    </div>
+
+    <div class="glass-container">
+        <header>
+            <h1>FCL Export Rate</h1>
+        </header>
+
+        <main>
+            <div class="upload-section" id="drop-area">
+                <div class="upload-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                        <polyline points="17 8 12 3 7 8"></polyline>
+                        <line x1="12" y1="3" x2="12" y2="15"></line>
+                    </svg>
+                </div>
+                <h3>Drag & Drop your Excel file here</h3>
+                <p>or</p>
+                <label for="fileInput" class="btn-primary">Browse Files</label>
+                <input type="file" id="fileInput" accept=".xlsx, .xls" hidden>
+                <div id="file-name" class="file-name"></div>
+            </div>
+
+            <div class="actions">
+                <div class="markup-section">
+                    <div class="form-group">
+                        <label for="markupPercent">Markup (%)</label>
+                        <input type="number" id="markupPercent" min="0" step="any" placeholder="e.g. 10"
+                            class="input-field">
+                    </div>
+                    <div class="form-group">
+                        <label for="flatMarkup">Flat Markup ($)</label>
+                        <input type="number" id="flatMarkup" min="0" step="any" placeholder="e.g. 50"
+                            class="input-field">
+                    </div>
+                </div>
+                <button id="processBtn" class="btn-action" disabled>
+                    <span class="btn-text">Process File</span>
+                    <span class="loader hidden"></span>
+                </button>
+            </div>
+
+            <div id="status-message" class="status-message hidden"></div>
+        </main>
+
+        <footer>
+            <div class="footer-content">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                    class="shield-icon">
+                    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+                </svg>
+                <span>100% Local Processing. Your data never leaves your browser.</span>
+            </div>
+        </footer>
+    </div>
+
+    <!-- Offline Dependencies -->
+    <script src="xlsx.full.min.js"></script>
+    <script src="script.js"></script>
+</body>
+
+</html>
