@@ -99,7 +99,7 @@ document.addEventListener('DOMContentLoaded', () => {
             processDataRowByRow(rows);
 
             // Create MainFreight sheet data (Steps 12-20)
-            const mainFreightRows = createMainFreightSheet(rows, markupPercent, flatMarkup);
+            const mainFreightRows = createMainFreightSheet(rows, flatMarkup, markupPercent);
 
             // Convert back to worksheet
             const newWorksheet = XLSX.utils.aoa_to_sheet(rows);
@@ -252,7 +252,7 @@ document.addEventListener('DOMContentLoaded', () => {
         return numMatch ? parseFloat(numMatch[0]) : null;
     }
 
-    function createMainFreightSheet(quoteCartRows, markupPct, flatMarkup) {
+    function createMainFreightSheet(quoteCartRows, flatMarkup, markupPct) {
         if (!quoteCartRows || quoteCartRows.length === 0) return [];
 
         // Map columns A, B, C, D, E, G, I, M, O (which is BOL at index 14)
@@ -330,8 +330,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
             // Step 20: Calculations
             const calcTotal = (cntrVal) => {
-                if (cntrVal === null || cntrVal === undefined || cntrVal === '') return null;
-                return (bolVal + Number(cntrVal)) * markupMult + flatMarkup;
+                if (cntrVal === null || cntrVal === undefined || String(cntrVal).trim() === '') return null;
+                const base = bolVal + Number(cntrVal) + flatMarkup;
+                return base * markupMult; // Which is base * (1 + markupPct/100)
             };
 
             mfRows[r][colN] = calcTotal(mfRows[r][colJ]);
