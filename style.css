@@ -207,20 +207,17 @@ header p strong {
     min-height: 24px;
 }
 
-/* Markup Section */
 .markup-section {
-    display: flex;
-    flex-wrap: wrap;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
     gap: 1rem;
     margin-bottom: 1.5rem;
     text-align: left;
 }
 
 .form-group {
-    flex: 1;
     display: flex;
     flex-direction: column;
-    min-width: 130px;
 }
 
 .form-group label {
