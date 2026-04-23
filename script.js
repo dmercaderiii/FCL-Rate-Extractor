@@ -184,17 +184,21 @@ document.addEventListener('DOMContentLoaded', () => {
                 row[29] = bolSum;
             }
 
-            // Step 11: Grouping by making it 1 line based on Base Columns.
-            // Using indices up to 28 excluding 5 (F) and 8 (I) as grouping key so rows coalesce.
+            // Step 11: Fill columns AE to AH from column F based on specific columns and group into 1 line.
+            // Grouping by B(1), C(2), D(3), E(4), H(7), J(9), R(17), U(20)
             let groups = new Map();
             for (let r = 1; r < rows.length; r++) {
                 let row = [...rows[r]];
-                let keyArr = [];
-                for (let c = 0; c <= 28; c++) {
-                    if (c !== 5 && c !== 8) {
-                        keyArr.push(String(row[c] || '').trim());
-                    }
-                }
+                let keyArr = [
+                    String(row[1] || '').trim(),  // B: INLAND ORIGIN
+                    String(row[2] || '').trim(),  // C: BASE ORIGIN
+                    String(row[3] || '').trim(),  // D: BASE DESTINATION
+                    String(row[4] || '').trim(),  // E: INLAND DESTINATION
+                    String(row[7] || '').trim(),  // H: EXPIRATION DATE
+                    String(row[9] || '').trim(),  // J: CARRIER SCAC
+                    String(row[17] || '').trim(), // R: COMMODITY GROUP
+                    String(row[20] || '').trim()  // U: RATE TYPE
+                ];
                 let key = keyArr.join('|');
 
                 if (!groups.has(key)) {
